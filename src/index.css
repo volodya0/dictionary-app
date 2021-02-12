@@ -11,3 +11,113 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.container{
+  margin-top: 60px;
+  width: 90%;
+}
+.htmlForm-control{
+  width: 90%;
+}
+
+.addNew{
+  margin-top: 100px;
+}
+
+.default-form{
+  padding: 20px 30px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid black;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.advanced-form{
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px 30px;
+  border: 1px solid black;
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.default-input-wrapper{
+  width: 20%;
+}
+.default-btn-wrapper{
+  width: 10%;
+}
+
+.list{
+  padding: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border: 1px solid black;
+}
+
+.fs-7{
+  font-size: 14px;
+}
+.fs-8{
+  font-size: 13px;
+}
+
+
+.my-btn{
+  position: absolute;
+  text-align: center;
+  font-size: 13px;
+  padding: 0;
+  width: 20px;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  background-color: gray;
+}
+
+
+
+
+.list-group{
+  border-radius: 0;
+  color: rgb(141, 141, 141);
+}
+
+
+.myAlert{
+  padding: 15px 35px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border: 1px solid black;
+}
+
+.alert-btn{
+  margin: 0 7px;
+  padding: 3px 10px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.alert-loader{
+  width: 25px;
+  height: 25px;
+}
+
+.my-bg-success{
+  background-color: rgb(197, 235, 197);
+}
+.my-bg-warning{
+  background-color: rgb(235, 241, 152);
+}
+.my-bg-primary{
+  background-color: rgb(152, 205, 241);
+}
