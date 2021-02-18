@@ -1,4 +1,5 @@
-import request from './request'
+import request from '../../requests/request-translator'
+import push from './pushItemThunk'
 const from = "ru"
 const to = "en"
 
@@ -14,7 +15,7 @@ function validate(word) {
 	}
 }
 
-function translateThunkCreator(original, from, to){
+function autoTranslateThunkCreator(original, from, to){
 	return function(dispatch){
 
 		dispatch({
@@ -61,16 +62,24 @@ function translateThunkCreator(original, from, to){
 							onClick:() => {
 								dispatch({type:"CLEAR"})
 								dispatch({type:"HIDE"})
-								dispatch({type:"PUSH",	item})
+								dispatch(push(item))
 							}
 						},
 						{
 							text:"Edit", 
 							color:"primary", 
 							onClick:() => {
-								dispatch({type:"ADVANCED"})
+								dispatch({type:"ADVANCED", header:"Edit auto-translate"})
 								dispatch({type:"HIDE"})
 								dispatch({type:"EDIT", item})
+							}
+						},
+						{
+							text:"Cancel", 
+							color:"danger", 
+							onClick:() => {
+								dispatch({type:"CLEAR"})
+								dispatch({type:"HIDE"})
 							}
 						}
 					]
@@ -106,7 +115,7 @@ function translateThunkCreator(original, from, to){
 	}
 }
 
-export default translateThunkCreator
+export default autoTranslateThunkCreator
 
 
 

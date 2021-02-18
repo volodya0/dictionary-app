@@ -13,39 +13,38 @@ code {
 }
 
 .container{
-  margin-top: 60px;
-  width: 90%;
+  width: 80%;
 }
+
 .htmlForm-control{
   width: 90%;
 }
 
-.addNew{
-  margin-top: 100px;
+.my-loader-wrapper{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.input-section{
+  text-align: center;
+  padding: 20px 80px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid black;
+  width: 100%;
 }
 
 .default-form{
-  padding: 20px 30px;
-  margin-left: auto;
-  margin-right: auto;
-  border: 1px solid black;
-  width: 100%;
+  margin-top: 14px;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
+}
+.advanced-form{
+  margin-top: 22px;
 }
 
-.advanced-form{
-  margin-left: auto;
-  margin-right: auto;
-  padding: 20px 30px;
-  border: 1px solid black;
-  width: 100%;
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
 
 .default-input-wrapper{
   width: 20%;
@@ -56,7 +55,6 @@ code {
 
 .list{
   padding: 20px;
-  margin-top: 30px;
   margin-bottom: 30px;
   border: 1px solid black;
 }
@@ -67,20 +65,6 @@ code {
 .fs-8{
   font-size: 13px;
 }
-
-
-.my-btn{
-  position: absolute;
-  text-align: center;
-  font-size: 13px;
-  padding: 0;
-  width: 20px;
-  border: none;
-  box-shadow: none;
-  outline: none;
-  background-color: gray;
-}
-
 
 
 
@@ -120,4 +104,139 @@ code {
 }
 .my-bg-primary{
   background-color: rgb(152, 205, 241);
+}
+
+.auth-form{
+  width: 35%;
+  padding: 35px 50px;
+  margin: 50px auto;
+  border: 1px solid black
+}
+.auth-form button{
+  margin: 30px 20px 0 0px;
+}
+
+.header{
+  height: 50px;
+  justify-content: space-between;
+  background-color: rgb(31, 82, 52);
+  display: flex;
+  flex-direction: row;
+}
+
+.header .wrapper{
+  display: flex;
+  flex-direction: row;
+}
+
+.header .nav-links{
+  padding: 0 15px;
+  justify-content: space-between;
+  width: 36%;
+  display: flex;
+  align-items: center;
+}
+
+.header .link{
+  color: aliceblue;
+  font-style: normal;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.nav-username-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-username-wrapper .sub-btn{
+  height: 30px;
+  padding: 5px;
+  margin-right: 15px;
+  line-height: 10px;
+}
+
+.nav-username{
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  color: rgb(169, 242, 251);
+}
+
+.selected{
+  background-color: rgba(173, 175, 171, 0.479);
+}
+.info-dic{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid black;
+  padding: 15px;
+}
+
+.dictionary-form{
+  border: 1px solid black;
+  margin: 0;
+}
+
+.dictionary-form .btn{
+  margin: 10px;
+}
+
+.dictionary-list{
+  margin: 0;
+  padding: 30px 10px;
+  border: 1px solid black;
+}
+
+.dictionary-list .card{
+  margin-bottom : 20px;
+}
+
+
+.dictionary-list .my-btn{
+  margin-right : 7px;
+}
+
+.dictionary-wrapper{
+  margin: 0;
+}
+
+.my-border{
+  border: 1px solid black;
+  padding: 15px;
+}
+
+.card-button{
+  width: 100%;
+  height: 100%;
+}
+.card-button-wrapper{
+  height: 100%;
+  padding-bottom: 20px;
+}
+
+.input-buttons-row{
+  display: flex;
+  margin-top: 25px;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.input-buttons-row button{
+  margin: 5px;
+  padding: 8px 25px;
+}
+
+.input-inputs-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.input-inputs-row input{
+  padding: 8px ;
+  margin-right: 15px;
 }

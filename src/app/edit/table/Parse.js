@@ -1,8 +1,6 @@
 import React from 'react'
 
-export function Parse(props){
-	let item = props.item
-	let number = props.number + 1
+function Parse({number, item, remove}){
 	return(
 		<tr>
 			<th scope="row">{number}</th>
@@ -13,15 +11,8 @@ export function Parse(props){
 			<td>
 				<button 
 					type="button" 
-					className="btn btn-info ms-3 fs-7 p-1" 
-					
-					>
-						Edit
-				</button>
-				<button 
-					type="button" 
 					className="btn btn-danger	ms-3 fs-7 p-1"
-					
+					onClick={() => remove(item.date, () => {})}
 					>
 						Remove
 				</button>
@@ -29,3 +20,5 @@ export function Parse(props){
 		</tr>
 	)
 }
+
+export default Parse

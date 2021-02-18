@@ -3,44 +3,51 @@ import { composeWithDevTools } from "redux-devtools-extension"
 import ReduxThunk from 'redux-thunk'
 
 const initial={
-	forToggle:true,
-	input:{
-		original: "",
-		translate: "",
-		description: "",
-		date: ""
+		auth:{
+			authorized:false,
+			user:{}
 		},
-	items:
-		[
-			{
-				original: "test_orig",
-				translate: "test_translate",
-				description: "test_desc",
-				tags: "test_tag",
-				date: "1613122911083"
+		toggle:{
+			isDefault: true,
+			header:"Auto"
+		},
+		input:{
+			original: "",
+			translate: "",
+			description: "",
+			date: ""
 			},
-			{
-				original: "test_orig2",
-				translate: "test_translate2",
-				description: "test_desc2",
-				tags: "test_tag2",
-				date: "1613122929244"
-			}
-		],
+		items:[],
 		alert:{
 			sign:"warning",
 			show:false,
 			message:"",
 			options:{}
-		}
+		},
+		dictionaries:[
+			{
+				first : {
+					date : 1613294520361,
+					items :[ 
+						{
+							date : 1613294520361,
+							original : "first in dictionary",
+							translate : "?????? ? ???????",
+							description: ""
+						}
+					],
+					"language" : "en-ru"
+				}
+			},
+		]
 	}
 
-function toggleReducer(state = initial.forToggle, action) {
+function toggleReducer(state = initial.toggle, action) {
 	switch (action.type) {
-	case 'TOGGLE':
-		return !state
+	case 'DEFAULT':
+		return {isDefault:true, header:action.header}
 	case 'ADVANCED':
-		return false
+		return {isDefault:false, header:action.header}
 	default:
 		return state
 	}
@@ -65,6 +72,18 @@ function itemsReducer(state = initial.items, action) {
   switch (action.type) {
     case 'PUSH':
       return [action.item, ...state]
+		case 'SET-ITEMS':
+			return [...action.items]
+    default:
+      return state
+  }
+}
+function dictionariesReducer(state = initial.dictionaries, action) {
+  switch (action.type) {
+    // case 'PUSH':
+    //   return [action.item, ...state]
+		case 'SET-DIC':
+			return [...action.dictionaries]
     default:
       return state
   }
@@ -84,9 +103,19 @@ function alertReducer(state = initial.alert, action) {
       return state
   }
 }
+function authReducer(state = initial.auth, action){
+	switch (action.type) {
+    case 'LOGIN':
+      return {authorized:true, user:action.user}
+    case 'LOGOUT':
+      return {authorized:false, user:{}}
+    default:
+      return state
+  }
+}
 
 
-const rootReducer = combineReducers({ forToggle:toggleReducer, input:inputReducer, items:itemsReducer, alert:alertReducer})
+const rootReducer = combineReducers({auth:authReducer, toggle:toggleReducer, input:inputReducer, items:itemsReducer, dictionaries:dictionariesReducer, alert:alertReducer})
  
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(ReduxThunk)))
 
