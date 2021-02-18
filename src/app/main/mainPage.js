@@ -1,4 +1,3 @@
-import store from '../../store/store'
 import React,{useContext} from 'react';
 import {AuthContext} from '../../context/Context'
 
