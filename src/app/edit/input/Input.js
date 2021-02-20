@@ -1,33 +1,36 @@
 import {Input, Button, Error} from '../../components/components'
 import {NavLink, useHistory} from "react-router-dom";
 
-function Advanced(props) {
+function InputPage(props) {
 	const set = props.set
 	const history = useHistory()
 
 	return (
 		<form 
-			className={'row gy-2 gx-3 align-items-center advanced-form'}
+			className={'row gy-2 gx-3 align-items-center input-section'}
 			onSubmit={e => {e.preventDefault(); props.submit()}}
 		>
 			<div className='input-inputs-row'>
 				<Input
-					id = {'advanced-original'}	
+					disabled = {props.status === 'load'}
+					id = {'input-original'}	
 					placeholder =  {'Original'}
 					value = {set.original}	
-					setValue =	{set.setOriginal}	
+					onChange =	{e => set.setOriginal(e.target.value)}	
 				/>
 				<Input	
-					id = {'advanced-translate'}	
+					disabled = {props.status === 'load'}
+					id = {'input-translate'}	
 					placeholder =  {'Translate'}
 					value = {set.translate}	
-					setValue =	{set.setTranslate}	
+					onChange =	{e => set.setTranslate(e.target.value)}	
 				/>
 				<Input	
-					id = {'advanced-description'}	
+				  disabled = {props.status === 'load'}
+					id = {'input-description'}	
 					placeholder =  {'Description'}
 					value = {set.description}	
-					setValue =	{set.setDescription}	
+					onChange =	{e => set.setDescription(e.target.value)}	
 				/>
 			</div>
 			<div className="input-buttons-row">
@@ -39,8 +42,8 @@ function Advanced(props) {
 				<Button options = {{
 					text:'Auto-translate',
 					color:'primary',
-					disabled: props.set.original === '',
-					onClick:() => alert('auto-translate')
+					disabled: props.set.original === '' || props.status === 'success',
+					onClick:props.translate
 				}}/>
 				<Button options = {{
 					color:'warning',
@@ -60,4 +63,4 @@ function Advanced(props) {
 	)
 }
 
-export default Advanced
+export default InputPage

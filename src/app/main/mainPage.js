@@ -7,11 +7,8 @@ function MainPage(){
 
 		return(
 			<>
-				<div>
-					<h1>Welcome</h1>
-					<h1> {context.auth.user.name}</h1>
-					<h1> {context.auth.user.email}</h1>
-					<h1> {context.auth.user.id}</h1>
+				<div className='main-section'>
+					<h1>Welcome {context.user.email}</h1>
 					{/* <h1> {context.auth.user.metadata.length}</h1> */}
 				</div>
 			</>

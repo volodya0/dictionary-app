@@ -1,19 +1,54 @@
-import AdvancedContainer  from './AdvancedContainer'
-// import DefaultContainer from './DefaultContainer'
-import React,{useState} from 'react'
-
+import React,{useState, useEffect} from 'react'
+import Input from './Input' 
 
 function InputContainer(props){
-	const [type, setType] = useState(true)
-	const toggle = () => setType(!type)
+
+	const [original, setOriginal] = useState('')
+	const [translate, setTranslate] = useState('')
+	const [description, setDescription] = useState('')
+	const [translatingStatus, setStatus] = useState('')
+
+	useEffect(() => {
+		if(translatingStatus === 'success'){setStatus('')}
+	},[original, translate])
+
+	const clear = () => {
+		setOriginal('')
+		setTranslate('')
+		setDescription('')
+	}
+
+	const translateFunc = () => {
+		setStatus('load')
+		props.translate(
+			original,
+			(translate) => {
+				setStatus('success')
+				setTranslate(translate)
+				setDescription('Translated-auto')
+			},
+			(error) => setStatus('fail')
+		)
+	}
+
+	const submit = () => {
+		props.add(
+			{original, translate, description},
+			clear,
+			()=>{}
+		)
+	}
+
+	let set = {original,setOriginal,translate,setTranslate,description,setDescription}
 
 	return(
-		<div className="input-section">
-			<h1>Header</h1>
-				<AdvancedContainer add={props.add} toggle={toggle} />
-		</div>
-	)
+		<Input
+			set={set} 
+			clear={clear} 
+			submit={submit}
+			translate={translateFunc}
+			status = {translatingStatus}
+		/>)
 }
 
 export default InputContainer
-

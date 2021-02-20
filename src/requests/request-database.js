@@ -1,42 +1,29 @@
 import firebase from 'firebase'	
-
+import {firebaseConfig} from '../config'
 firebase.initializeApp(firebaseConfig);
+
 var DB = firebase.database()
 
 export const authRequests = {
-	create:function(email, password, onSuccess, onFail){
-		firebase.auth().createUserWithEmailAndPassword(email, password)
-		.then(res => {onSuccess(res)})
-		.catch(e => {onFail(e)})
+	userInfo:function() {
+		return firebase.auth().currentUser
 	},
-	logIn:function(email, password, onSuccess, onFail) {
+	create:function({name, email, password, onSuccess, onFail}){
+		firebase.auth().createUserWithEmailAndPassword(email, password)
+		.then(() => firebase.auth().updateCurrentUser({displayName: name}).then(onSuccess))
+		.catch(e => onFail(e.message))
+	},
+	logIn:function({email, password, onSuccess, onFail}) {
 		firebase.auth().signInWithEmailAndPassword(email, password)
-		.then(res => {onSuccess(res)})
-		.catch(e => {onFail(e)})
+		.then(res => onSuccess(res))
+		.catch(e => onFail(e.message))
 	},
 	logOut:function() {
 		firebase.auth().signOut()
-		.then(res => console.log(res))
 		.catch(e => alert("sign out error, e = "+e))
 	},
-	addUser:function(user, handler){	
-		DB.ref('/users/'+user.id).set(user, handler);		
-	},
-	getUser:function(id,onSuccess, onFail) {
-		DB.ref('/users/'+id).get()
-		.then(function(snapshot) {
-			if (snapshot.exists()) {
-				onSuccess(snapshot.val())
-			}
-			else {
-				onFail("Is empty");
-			}
-		})
-		.catch(function(e) {
-			onFail(`Database error (getUser), error_message = ${e}`)
-		});
-	},
 }
+window.Auth = authRequests 
 
 export const dictionaryRequests = {
 
@@ -47,6 +34,7 @@ export const dictionaryRequests = {
 	},
 
 	addDictionary:function({dictionary, onSuccess, onFail}) {
+		console.log(dictionary)
 		DB.ref(`/dictionaries/${dictionary.uid}/${dictionary.name}`)
 			.set(dictionary, (e) => e ? onFail(e) : onSuccess())
 	},
@@ -62,6 +50,8 @@ export const dictionaryRequests = {
 		DB.ref(`/dictionaries/${uid}/${dictName}/words`)
 			.set(count, e => e ? alert(e) : onSuccess())
 	}
+
+	
 }
 
 export const itemsRequests = {

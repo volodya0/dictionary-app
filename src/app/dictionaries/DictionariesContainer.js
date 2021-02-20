@@ -8,9 +8,9 @@ function DictionariesContainer(){
 
 	const [addMode, setAddMode] = useState(false)
 	const [status, setStatus] = useState({type:'load'})
-
 	const context = useContext(AuthContext)
-	const uid = context.auth.user.id
+
+	const uid = context.user.uid
 
 	const langArray = Object.entries(codes)
 
@@ -24,6 +24,7 @@ function DictionariesContainer(){
 			onFail:e => alert(e)
 		})
 	}
+	
 	function addDict(name, from, to) {
 		setStatus({type:'load'})
 		dictionaryRequests.addDictionary({
@@ -32,6 +33,7 @@ function DictionariesContainer(){
 			onFail:e => alert(e)
 		})
 	}
+
 	function remDict(dictName) {
 		setStatus({type:'load'})
 		dictionaryRequests.removeDictionary({uid, dictName, onSuccess:() => getDict()})

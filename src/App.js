@@ -1,4 +1,5 @@
-import React,{useReducer} from 'react'
+import React,{useState, useEffect} from 'react'
+import firebase from 'firebase'
 import AuthContainer from './app/auth/AuthContainer'
 import MainPage from './app/main/mainPage';
 import Dictionaries from './app/dictionaries/DictionariesContainer';
@@ -8,32 +9,15 @@ import {BrowserRouter,Switch,Route,useHistory, Redirect} from 'react-router-dom'
 import {AuthContext} from './context/Context'
 
 function App() {
+  const [user, setUser] = useState(null)
 
-  const initialState = {
-    auth:{
-      authorized:false,
-      user:{}
-    }
-  }
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case 'LOGIN':
-        return {...state, auth:{authorized:true, user:action.user}}
-      case 'LOGOUT':
-        return {...state, auth:{authorized:false, user:{}}}
-      default :
-        return state
-    }
-  }
-  const [state, dispatch] = useReducer(reducer, initialState)
-  const onLogin = (user) => dispatch({type:'LOGIN', user})
-  const onLogout = () => dispatch({type:'LOGOUT'})
-
+  firebase.auth().onAuthStateChanged(setUser)
+  
   return (
-    <div className='App container'>
-      <AuthContext.Provider value={{auth:state.auth, onLogout}} >
+    <div className='container'>
+      <AuthContext.Provider value={{user}} >
         <BrowserRouter>
-          {state.auth.authorized ? 
+          {user ?
             <Switch>
               <Route path='/main'>
                 <Header />
@@ -43,17 +27,23 @@ function App() {
                 <Header />
                 <Dictionaries />
               </Route>
-              <Route path='/edit/:name'>
+              <Route path='/edit/:dictName/:from/:to'>
                 <Header />
                 <Edit />
               </Route>
+              <Route path='/'>
+                <Redirect to='/main'/>
+              </Route>
             </Switch>
-          :<AuthContainer onLogin={onLogin}/>
+            : 
+            <AuthContainer onLogin={setUser}/>
           }
-        </BrowserRouter>
+        </BrowserRouter>  
       </AuthContext.Provider>
     </div>
-  );
+  )
+
+
 }
 
 

@@ -1,5 +1,6 @@
 ﻿import React,{useState, useEffect, useContext, useCallback} from 'react'
 import {itemsRequests, dictionaryRequests}  from '../../requests/request-database'
+import translateRequest from '../../requests/request-translator'
 import {useRouteMatch } from 'react-router-dom'
 import {AuthContext} from '../../context/Context'
 import InputContainer from './input/InputContainer'
@@ -8,11 +9,12 @@ import Table from './table/Table'
 
 const EditContainer = (props) => {
 
-  const uid = useContext(AuthContext).auth.user.id
-	const dictName = useRouteMatch().params.name
+  const uid = useContext(AuthContext).user.uid
+	const {dictName, from, to} =  useRouteMatch().params
 
 	const [items, setItems] = useState([])
 	const [tableState, setTableState] = useState({status:'request'})
+
   useEffect(() => {itemsRequests.getItems({
 		uid,
 		dictName,
@@ -56,10 +58,14 @@ const EditContainer = (props) => {
 			}
 		})
 	}
+
+	function translate(original, onSuccess, onFail) {
+		translateRequest({original, from, to, onSuccess, onFail})
+	}
 		
 	return (
 		<>
-			<InputContainer add={add} />
+			<InputContainer add={add} translate={translate}/>
 			<Table state={tableState} items={items} remove={remove} />
 		</>
 	)

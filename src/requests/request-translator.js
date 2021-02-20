@@ -1,9 +1,8 @@
-const email = "volodauzuk02@gmail.com"
-const URL = "https://api.mymemory.translated.net/get?"
+import {email, translationApiUrl} from '../config'
 
-export default function request(original, from, to, onSuccess, onFail){
+export default function request({original, from, to, onSuccess, onFail}){
 
-	fetch(`${URL}q=${original}!&langpair=${from}|${to}&de=${email}`)
+	fetch(`${translationApiUrl}q=${original}!&langpair=${from}|${to}&de=${email}`)
 	.then(response => response.json())
 	.then(res => {
 		if(res.responseStatus === 200){

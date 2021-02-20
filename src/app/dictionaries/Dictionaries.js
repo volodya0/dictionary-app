@@ -75,8 +75,8 @@ function List(props) {
 							<div className='card'>
 								<div className='card-body'>
 									<h5 className='card-title'>{item.name}</h5>
-									<p className='card-text'>{`To : ${item.to}`}</p>
-									<p className='card-text'>{`From : ${item.from}`}</p>
+									<p className='card-text'>{`From : ${item.from.language}`}</p>
+									<p className='card-text'>{`To : ${item.to.language}`}</p>
 									<p className='card-text'>{`Words : ${item.words}`}</p>
 									<p className='card-text'>{`Created : ${new Date(+item.date).toLocaleString()}`}</p>
 									<Button options={{
@@ -87,7 +87,7 @@ function List(props) {
 									<Button options={{
 										color: 'primary',
 										text: 'Edit',
-										onClick: () => {history.push(`/edit/${item.name}`)}
+										onClick: () => {history.push(`/edit/${item.name}/${item.from.code}/${item.to.code}`)}
 									}} />
 									<Button options={{
 										color: 'warning',
@@ -121,38 +121,49 @@ function List(props) {
 function AddDictionary(props) {
 
 	const [name, setName] = useState('')
-	const [select, setSelect] = useState({from:'en', to:'ru'})
-	const [message, setMessage] = useState(null)
+	const [selectFrom, setFrom] = useState({code:'en', language:'english'})
+	const [selectTo, setTo] = useState({code:'ru', language:'russian'})
+
+	const onSelect = (eTarget, type) => {
+		const option = eTarget[eTarget.selectedIndex]
+		const object = {code:option.value, language:option.text}
+		type === 'from' ? setFrom(object) : setTo(object)
+	}
+
+	useEffect(() => {
+		setName(`${selectFrom.language} - ${selectTo.language}`)
+	}, [selectTo, selectFrom])
 
 return(
 	<form className='dictionary-form'>
-		<div className='input-group my-4'>
-			<label className='form-label mx-3'>Name:</label>
-			<input 
-				type='text' 
-				className='form-control'  
-				value={name}
-				onChange={(e) => setName(e.target.value)}
-			/>
-		</div>
 
-		<label className='form-label mb-3 w-100 text-center'>Please input params:</label>
-		<div class='input-group mb-3'>
+		<label className='form-label my-3 w-100 text-center'><h3>Please input params</h3></label>
+		<div class='input-group mb-1'>
 
 			<label className='form-label mx-3'>From:</label>
-			<select className='form-select' value = {select.from} onChange={e => setSelect({from:select.to, from:e.target.value})}>
-				{
-					props.langArray.map(language => 
-						<option  	
-							value={language[1]}>
-							{language[0]}
-						</option>
-					)
-				}
+			<select 
+				name = 'from'
+				className='form-select' 
+				value = {selectFrom.code} 
+				onChange={(e) => onSelect(e.target, 'from')}
+				>
+					{
+						props.langArray.map(language => 
+							<option  	
+								value={language[1]}>
+								{language[0]}
+							</option>
+						)
+					}
 			</select>
 
 			<label className='form-label mx-3'>To:</label>
-			<select className='form-select' value = {select.to} onChange={e => setSelect({from:select.from, to:e.target.value})}>
+			<select 
+				name='to'
+				className='form-select' 
+				value = {selectTo.code} 
+				onChange={(e) => onSelect(e.target, 'to')}
+			>
 				{
 					props.langArray.map(language => 
 						<option  	
@@ -163,14 +174,26 @@ return(
 				}
 			</select>
 
+			<div className='input-group mt-4 mb-2'>
+				<label className='form-label mx-3'>Name:</label>
+				<input 
+					type='text' 
+					className='form-control'  
+					value={name}
+					onChange={(e) => setName(e.target.value)}
+				/>
+			</div>
+
 
 		</div>
-		<Error message={message}/>
 		<Button options = {{
 			color:'success',
 			text:'Add',
-			disabled: ((name === '')||(select.to === select.from)),
-			onClick: () => {props.add(name, select.from, select.to)}			
+			disabled: ((name === '')||(selectTo.language === selectFrom.language)),
+			onClick: () => { 
+			console.log('onClick', selectFrom, selectTo)
+			props.add(name, selectFrom, selectTo)
+		}			
 		}}/>
 		<Button options = {{
 			color:'warning',
