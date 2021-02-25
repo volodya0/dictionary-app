@@ -2,60 +2,56 @@ import React,{useState, useEffect, useContext} from 'react'
 import {dictionaryRequests} from '../../requests/request-database'
 import Dictionaries from './Dictionaries'
 import codes from '../../requests/wordsAndCodes'
-import {AuthContext} from '../../context/Context'
+import {connect} from 'react-redux'
+import {mapStateToPropsGen, mapDispatchToPropsGen} from '../../store/store'
 
-function DictionariesContainer(){
+function DictionariesContainer(props){
 
 	const [addMode, setAddMode] = useState(false)
-	const [status, setStatus] = useState({type:'load'})
-	const context = useContext(AuthContext)
-
-	const uid = context.user.uid
-
+	const [status, setStatus] = useState('ok')
 	const langArray = Object.entries(codes)
+	const uid = props.user.id
 
-	function getDict(){
-		setStatus({type:'load'})
-		dictionaryRequests.getDictionaries({
-			uid,
-			onSuccess:dictionaries => {
-				setStatus(dictionaries.length ? {type:'success', dictionaries}:{type:'empty'})
-			},
-			onFail:e => alert(e)
-		})
+	function refresh(){
+		setStatus('request')
+		props.refreshDictionaries(
+			() => setStatus('success'),
+			() => setStatus('fail')
+		)
 	}
 	
 	function addDict(name, from, to) {
-		setStatus({type:'load'})
+		setStatus('request')
 		dictionaryRequests.addDictionary({
-			dictionary:{uid, name, from, to, words:0, date:Date.now()},
-			onSuccess:() => {setAddMode(false); getDict()},
+			dictionary:{uid, name, from, to, date:Date.now()},
+			onSuccess:() => {setAddMode(false); refresh()},
 			onFail:e => alert(e)
 		})
 	}
 
-	function remDict(dictName) {
-		setStatus({type:'load'})
-		dictionaryRequests.removeDictionary({uid, dictName, onSuccess:() => getDict()})
+	function remDict(dictId) {
+		setStatus('request')
+		dictionaryRequests.removeDictionary({uid, dictId, onSuccess:() => refresh()})
 	}
-	
-	useEffect(() => {
-		getDict()
-	}, [])
 
+	useEffect(() => {
+		refresh()
+	}, [])
 	
 	return (
 		<Dictionaries 
 			status={status}
 			addMode={addMode}
 			langArray={langArray}
-			get={getDict}
+			refresh={refresh}
+			dictionaries={props.dictionaries}
 			add={addDict}
 			rem={remDict}
 			setAddMode={setAddMode}
 		/>)
 }
 
-export default DictionariesContainer
+const Dictionaries_w = connect(mapStateToPropsGen('dictionaries'), mapDispatchToPropsGen('dictionaries'))(DictionariesContainer)
 
+export default Dictionaries_w 
 

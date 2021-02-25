@@ -1,18 +1,20 @@
 import {authRequests} from '../../requests/request-database'
-import {Error, Input, Button, Loader} from '../components/components'
+import {Error, Button, Loader} from '../components/components'
 import {LoginInputs, RegisterInputs} from './Inputs'
 import React,{useState, useEffect} from 'react'
-import {useHistory} from 'react-router-dom'
+import {connect} from 'react-redux'
+import { mapDispatchToPropsGen } from '../../store/store'
+import { useHistory } from 'react-router-dom'
 
 
 function AuthContainer(props){
-	
-	const history = useHistory()
+
 	const [isTypeLogin, setType] = useState(true)
 	const [message, setMessage] = useState(null)
 	const [disabledBtn, setDisabled] = useState(true)
 	const [loader, setLoader] = useState(false)
 	const [values, set] = useState({name:'', email:'', password:'', password_:''})
+	const history = useHistory()
 
 	const mainButtonOptions = {
 		color: 'success',
@@ -33,9 +35,16 @@ function AuthContainer(props){
 		authRequests.logIn({
 			email: values.email,
 			password: values.password, 
-			onSuccess: (user) => {
-				history.push('/main')
-				props.onLogin(user)
+			onSuccess: (res) => {
+				props.setUser({
+					name : res.user.displayName,
+					id : res.user.uid,
+					photoURL : res.user.photoURL,
+					email: res.user.email,
+					phone: res.user.phoneNumber,
+					lastLogin : res.user.metadata.b,
+					created: res.user.metadata.a
+				})
 				setLoader(false)
 			},
 			onFail: (message) => {
@@ -56,7 +65,6 @@ function AuthContainer(props){
 					email: values.email,
 					password: values.password, 
 					onSuccess: (user) => {
-						history.push('/main')
 						props.onLogin(user)
 						setLoader(false)
 					},
@@ -109,8 +117,6 @@ function AuthContainer(props){
 
 	}, [...Object.values(values), isTypeLogin])
 
-
-
 	return(
 		<form className='auth-form'>
 
@@ -149,4 +155,6 @@ function AuthContainer(props){
 
 }
 
-export default AuthContainer
+const Auth_w = connect(undefined, mapDispatchToPropsGen('auth'))(AuthContainer)
+
+export default Auth_w

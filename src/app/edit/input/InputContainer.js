@@ -35,7 +35,7 @@ function InputContainer(props){
 		props.add(
 			{original, translate, description},
 			clear,
-			()=>{}
+			(e)=> alert(e)
 		)
 	}
 

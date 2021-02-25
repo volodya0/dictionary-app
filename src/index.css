@@ -14,6 +14,7 @@ code {
 
 .container{
   width: 80%;
+  margin-top: 40px;
 }
 
 .htmlForm-control{
@@ -241,4 +242,24 @@ code {
 .main-section{
   border: 1px solid black;
   padding: 20px;
+}
+
+.row-with-info{
+  border-bottom: 1px solid rgb(195, 195, 195);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.row-with-info p{
+  font-size: 18px;
+}
+
+.dictionaries-info-buttons button{
+  margin: 0 10px;
+}
+
+.statistic button{
+  margin: 10px;
 }

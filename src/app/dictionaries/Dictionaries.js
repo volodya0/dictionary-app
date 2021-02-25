@@ -1,10 +1,10 @@
-import React,{useState, createRef, useEffect} from 'react'
+import React,{useState, useContext, useEffect} from 'react'
 import {Button, Loader, Error} from '../components/components'
 import {useHistory} from 'react-router-dom';
 
 
 function Dictionaries(props) {
-	const status = props.status.type
+	const status = props.status
 	return(
 		<div>
 			<div className='row dictionary-wrapper'>
@@ -17,9 +17,10 @@ function Dictionaries(props) {
 					:
 					<Info
 						setAddMode={props.setAddMode}
+						refresh={props.refresh}
 					/>
 				}{
-				status === 'load'?
+				status === 'request'?
 					<Loader 
 						options={{size:60,color:'success'}}
 					/>:
@@ -34,7 +35,7 @@ function Dictionaries(props) {
 					</div>
 					:
 					<List
-						dictionaries ={props.status.dictionaries}
+						dictionaries ={props.dictionaries}
 						rem={props.rem}
 						addMode={props.addMode}
 						setAddMode={props.setAddMode}
@@ -53,8 +54,18 @@ function Info(props) {
 			<div>
 				<h1>Dictionaries</h1>
 			</div>
-			<div>
+			<div className='dictionaries-info-buttons'>
 				<Button options = {{
+					color:'secondary',
+					text:'Back to main',
+					linkTo:'main'
+				}}/>
+				<Button options = {{
+					text:'Refresh',
+					onClick:props.refresh
+				}}/>
+				<Button options = {{
+					color:'success',
 					class:'add-dictionary-btn',
 					text:'Create new',
 					onClick:() => {props.setAddMode(mode => !mode)}
@@ -69,16 +80,16 @@ function List(props) {
 	return(
 		<div className='row dictionary-list'>
 			{
-				props.dictionaries.map(item => {
+				props.dictionaries.map(dict => {
 					return(
-						<div className='col-sm-4' key={item.name}>
+						<div className='col-sm-4' key={dict.date}>
 							<div className='card'>
 								<div className='card-body'>
-									<h5 className='card-title'>{item.name}</h5>
-									<p className='card-text'>{`From : ${item.from.language}`}</p>
-									<p className='card-text'>{`To : ${item.to.language}`}</p>
-									<p className='card-text'>{`Words : ${item.words}`}</p>
-									<p className='card-text'>{`Created : ${new Date(+item.date).toLocaleString()}`}</p>
+									<h5 className='card-title'>{dict.name}</h5>
+									<p className='card-text'>{`From : ${dict.from.language}`}</p>
+									<p className='card-text'>{`To : ${dict.to.language}`}</p>
+									<p className='card-text'>{`Words : ${dict.items ? Object.keys(dict.items).length : 0}`}</p>
+									<p className='card-text'>{`Created : ${new Date(+dict.date).toLocaleString()}`}</p>
 									<Button options={{
 										color: 'success',
 										text: 'Learn',
@@ -87,14 +98,14 @@ function List(props) {
 									<Button options={{
 										color: 'primary',
 										text: 'Edit',
-										onClick: () => {history.push(`/edit/${item.name}/${item.from.code}/${item.to.code}`)}
+										linkTo: 'edit/'+dict.date
 									}} />
 									<Button options={{
 										color: 'warning',
 										text: 'Delete',
 										onClick: () => {
-											alert('Are you sirius?')
-											props.rem(item.name)
+											const c = window.confirm('Delete '+dict.name+'?')
+											if (c) props.rem(dict.date)
 										;}
 									}} />
 								</div>
@@ -187,13 +198,18 @@ return(
 
 		</div>
 		<Button options = {{
+			color:'secondary',
+			text:'<-- Back to main',
+			linkTo:'main'
+		}}/>
+		<Button options = {{
 			color:'success',
 			text:'Add',
 			disabled: ((name === '')||(selectTo.language === selectFrom.language)),
 			onClick: () => { 
 			console.log('onClick', selectFrom, selectTo)
 			props.add(name, selectFrom, selectTo)
-		}			
+		}
 		}}/>
 		<Button options = {{
 			color:'warning',
