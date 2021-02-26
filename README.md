@@ -1,6 +1,7 @@
 # Deployed
 
 https://translator-dictionary-b7d19.web.app/
+
 translator-dictionary-b7d19.firebaseapp.com/
 
 # Getting Started with Create React App
