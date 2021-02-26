@@ -50,6 +50,11 @@ function MainPage(props) {
 									}}/>						
 									</>
 								:<></>}
+							<Button options={{
+								text:'View sources on gitHub',
+								color:'success',
+								onClick: (e) => {window.open('https://github.com/volodya0/dictionary-app')}
+							}}/>
 						</div>
 					}
 			</div>

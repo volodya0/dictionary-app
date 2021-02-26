@@ -25,7 +25,7 @@ function DictionariesContainer(props){
 		dictionaryRequests.addDictionary({
 			dictionary:{uid, name, from, to, date:Date.now()},
 			onSuccess:() => {setAddMode(false); refresh()},
-			onFail:e => alert(e)
+			onFail:() => {}
 		})
 	}
 

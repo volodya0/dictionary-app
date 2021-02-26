@@ -1,5 +1,7 @@
 import {Loader} from '../../components/components'
 import Parse from './Parse'
+import React from 'react'
+
 
 function Table({status, items, remove}){ 
 	return(

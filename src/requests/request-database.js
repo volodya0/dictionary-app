@@ -19,7 +19,6 @@ export const authRequests = {
 	},
 	logOut:function() {
 		firebase.auth().signOut()
-		.catch(e => alert("sign out error, e = "+e))
 	},
 }
 

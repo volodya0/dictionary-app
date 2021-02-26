@@ -1,3 +1,4 @@
+import React from 'react'
 import {connect } from 'react-redux'
 import {Button} from './components/components'
 import {mapStateToPropsGen, mapDispatchToPropsGen} from '../store/store'

@@ -1,4 +1,6 @@
 import {Input, Button, Error} from '../../components/components'
+import React from 'react'
+
 
 function InputPage(props) {
 	const set = props.set

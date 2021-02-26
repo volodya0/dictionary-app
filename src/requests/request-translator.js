@@ -26,5 +26,5 @@ export default function request({original, from, to, onSuccess, onFail}){
 			onFail(`server error, sorry`)
 		}
 	})
-	.catch(e => alert("ERROR_CATCH"+e))
+	.catch(e => onFail(e))
 }

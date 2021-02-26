@@ -90,7 +90,7 @@ function List(props) {
 									<Button options={{
 										color: 'success',
 										text: 'Learn',
-										onClick: () => {alert('learn')}
+										onClick: () => {}
 									}} />
 									<Button options={{
 										color: 'primary',
@@ -203,10 +203,7 @@ return(
 			color:'success',
 			text:'Add',
 			disabled: ((name === '')||(selectTo.language === selectFrom.language)),
-			onClick: () => { 
-			console.log('onClick', selectFrom, selectTo)
-			props.add(name, selectFrom, selectTo)
-		}
+			onClick: () => props.add(name, selectFrom, selectTo)
 		}}/>
 		<Button options = {{
 			color:'warning',
