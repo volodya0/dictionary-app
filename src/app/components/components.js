@@ -7,7 +7,7 @@ export function Button(props) {
 	return(
 		<button 
 			type={options.type||'submit'} 
-			className={`sub-btn my-btn btn btn-${options.color||'primary'} ${options.class||''}`}
+			className={`sub-btn my-btn btn btn${options.outline?'-outline':''}-${options.color||'primary'} ${options.class||''}`}
 			onClick={(e) => {
 				e.preventDefault()  
 					if(options.onClick)

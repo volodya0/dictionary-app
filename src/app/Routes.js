@@ -1,12 +1,12 @@
-import React,{useState, useReducer} from 'react'
+import React from 'react'
 import AuthContainer from './auth/AuthContainer'
 import MainPage from './main/mainContainer';
 import Dictionaries from './dictionaries/DictionariesContainer';
 import Edit from './edit/EditContainer'
-import {Loader} from './components/components'
-import {BrowserRouter,Switch,Route, Redirect, useHistory} from 'react-router-dom';
+import {Switch,Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux'
 import {mapStateToPropsGen} from '../store/store'
+import Header from './header'
 
 
 
@@ -16,22 +16,23 @@ function Routes(props){
 		return <AuthContainer/>
 	}else{
 		return(
-			<BrowserRouter>
-					<Switch>
-						<Route path='/main'>
-							<MainPage/>
-						</Route>
-						<Route path='/dictionaries'>
-							<Dictionaries/>
-						</Route>
-						<Route path='/edit/:id'>
-							<Edit />
-						</Route>
-						<Route path='/'>
-							<Redirect to='/main'/>
-						</Route>
-					</Switch>
-			</BrowserRouter>
+			<div>
+				<Header />
+				<Switch>
+					<Route path='/main'>
+						<MainPage/>
+					</Route>
+					<Route path='/dictionaries'>
+						<Dictionaries/>
+					</Route>
+					<Route path='/edit/:id'>
+						<Edit />
+					</Route>
+					<Route path='/'>
+						<Redirect to='/main'/>
+					</Route>
+				</Switch>
+			</div>
 		)
 	}			  
 }

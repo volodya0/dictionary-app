@@ -3,14 +3,6 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import ReduxThunk from 'redux-thunk';
 import {authRequests, dictionaryRequests} from '../requests/request-database'
 
-const initialState = {
-  auth:{
-    authorized: false,
-    user: null
-  },
-  dictionaries:[]
-}
-
 function authReducer(state = {authorized:false, user:{}}, action) {
   switch (action.type) {
     case 'SET-USER':
@@ -71,11 +63,15 @@ export function mapStateToPropsGen(component){
           dictionaries : state.dictionaries
         }
       }
-      break;
+    case 'header':
+      return (state) => {
+        return {
+          email : state.auth.user.email
+        }
+      }
   
     default:
       return undefined
-      break;
   }
 }
 
@@ -138,9 +134,17 @@ export function mapDispatchToPropsGen(component){
           },
         }
       }  
+    case 'header':
+      return (dispatch) => {
+        return {
+          logOut : () => {
+            authRequests.logOut()
+            dispatch({type:'LOGOUT'})
+          }
+        }
+      }  
     default:
       return undefined
-      break;
   }
 }
 

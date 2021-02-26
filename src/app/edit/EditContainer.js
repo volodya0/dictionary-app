@@ -1,4 +1,4 @@
-﻿import React,{useState, useEffect, useContext, useCallback} from 'react'
+﻿import React,{useState, useEffect, useCallback} from 'react'
 import {dictionaryRequests}  from '../../requests/request-database'
 import translateRequest from '../../requests/request-translator'
 import InputContainer from './input/InputContainer'
@@ -15,14 +15,14 @@ const EditContainer = (props) => {
 	const dictionary = props.dictionaries.find(dict => dict.date == dictId)
 	const items = dictionary.items? Object.values(dictionary.items) : []
 
-	function add(item) {
+	function add(item, onSuccess) {
 		setStatus('request')
 		item = {...item,	date:Date.now()}
 		dictionaryRequests.addItem({
 			uid,dictId,item,
 			onSuccess:() => {
 				props.refreshDictionaries(
-					() => setStatus('success'),
+					() => {setStatus('success'); onSuccess()},
 					() => setStatus('fail')
 				)
 			},
@@ -47,13 +47,13 @@ const EditContainer = (props) => {
 	function translate(original, onSuccess, onFail) {
 		translateRequest({original, from:'en', to:'ru', onSuccess, onFail})
 	}
+
+	const refresh = useCallback(() => {
+		props.refreshDictionaries(() => setStatus('success'),() => setStatus('fail'))}, [props])
 		
 	useEffect(() => {
-		props.refreshDictionaries(
-			() => setStatus('success'),
-			() => setStatus('fail')
-		)
-	}, [])
+		refresh()
+	}, [refresh])
 
 	return (
 		<>

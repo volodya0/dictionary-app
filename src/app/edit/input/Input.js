@@ -1,9 +1,7 @@
 import {Input, Button, Error} from '../../components/components'
-import {NavLink, useHistory} from "react-router-dom";
 
 function InputPage(props) {
 	const set = props.set
-	const history = useHistory()
 
 	return (
 		<form 
@@ -37,7 +35,7 @@ function InputPage(props) {
 				<Button options = {{
 					text:'Back to dictionaries',
 					color:'secondary',
-					onClick:() => history.push('/dictionaries')
+					linkTo:'/dictionaries'
 				}}/>
 				<Button options = {{
 					text:'Auto-translate',

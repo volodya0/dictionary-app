@@ -1,12 +1,12 @@
-import {Error, Loader} from '../../components/components'
+import {Loader} from '../../components/components'
 import Parse from './Parse'
 
 function Table({status, items, remove}){ 
 	return(
 		<div className="list">
 			{
-				status === 'error'? <tr><td>ERROR</td></tr>: 
-				status === 'request'? <tr><td><Loader /></td></tr>:
+				status === 'error'? <h5>Error</h5>: 
+				status === 'request'? <Loader />:
 				status === 'success'?
 					items === [] ? <h4>This dictionary is empty now</h4>: 
 						<table className="table">
@@ -30,7 +30,7 @@ function Table({status, items, remove}){
 											remove={remove}
 										/> )
 								}
-								<tr>It`s all</tr>
+								<tr><th>it's all</th></tr>
 							</tbody>
 						</table> 
 				: <></>

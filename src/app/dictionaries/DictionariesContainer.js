@@ -1,4 +1,4 @@
-import React,{useState, useEffect, useContext} from 'react'
+import React,{useState, useEffect, useCallback} from 'react'
 import {dictionaryRequests} from '../../requests/request-database'
 import Dictionaries from './Dictionaries'
 import codes from '../../requests/wordsAndCodes'
@@ -12,13 +12,13 @@ function DictionariesContainer(props){
 	const langArray = Object.entries(codes)
 	const uid = props.user.id
 
-	function refresh(){
+	const refresh = useCallback(() => {
 		setStatus('request')
 		props.refreshDictionaries(
 			() => setStatus('success'),
 			() => setStatus('fail')
 		)
-	}
+	}, [setStatus])
 	
 	function addDict(name, from, to) {
 		setStatus('request')
@@ -36,7 +36,7 @@ function DictionariesContainer(props){
 
 	useEffect(() => {
 		refresh()
-	}, [])
+	}, [refresh])
 	
 	return (
 		<Dictionaries 

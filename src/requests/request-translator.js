@@ -1,8 +1,8 @@
-import {email, translationApiUrl} from '../config'
+import {translationApiUrl} from '../config'
 
 export default function request({original, from, to, onSuccess, onFail}){
 
-	fetch(`${translationApiUrl}q=${original}!&langpair=${from}|${to}&de=${email}`)
+	fetch(`${translationApiUrl}q=${original}!&langpair=${from}|${to}`)
 	.then(response => response.json())
 	.then(res => {
 		if(res.responseStatus === 200){

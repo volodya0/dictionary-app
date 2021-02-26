@@ -1,7 +1,5 @@
-import React,{useState, useContext, useEffect} from 'react'
-import {Button, Loader, Error} from '../components/components'
-import {useHistory} from 'react-router-dom';
-
+import React,{useState, useEffect} from 'react'
+import {Button, Loader} from '../components/components'
 
 function Dictionaries(props) {
 	const status = props.status
@@ -76,7 +74,6 @@ function Info(props) {
 }
 
 function List(props) {
-	const history = useHistory()
 	return(
 		<div className='row dictionary-list'>
 			{

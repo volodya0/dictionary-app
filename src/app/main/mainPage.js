@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {Button, Loader, NavCreate} from '../components/components'
+import {Button, Loader} from '../components/components'
 
 function MainPage(props) {
 	const [infoMode, setMode] = useState(false)
@@ -39,10 +39,10 @@ function MainPage(props) {
 										<p>email: {props.user.email}</p>
 									</div>
 									<div className='row-with-info'>
-										<p>created: {props.user.created}</p>
+										<p>created: {new Date(+props.user.created).toLocaleString()}</p>
 									</div>
 									<div className='row-with-info'>
-										<p>lastLogin: {props.user.lastLogin}</p>
+										<p>lastLogin: {new Date(+props.user.lastLogin).toLocaleString()}</p>
 									</div>		
 									<Button options={{
 										text:'Close',

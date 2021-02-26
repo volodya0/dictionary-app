@@ -1,7 +1,7 @@
 import {authRequests} from '../../requests/request-database'
 import {Error, Button, Loader} from '../components/components'
 import {LoginInputs, RegisterInputs} from './Inputs'
-import React,{useState, useEffect} from 'react'
+import React,{useState, useEffect, useCallback} from 'react'
 import {connect} from 'react-redux'
 import { mapDispatchToPropsGen } from '../../store/store'
 import { useHistory } from 'react-router-dom'
@@ -36,6 +36,7 @@ function AuthContainer(props){
 			email: values.email,
 			password: values.password, 
 			onSuccess: (res) => {
+				history.push('/main')
 				props.setUser({
 					name : res.user.displayName,
 					id : res.user.uid,
@@ -81,7 +82,7 @@ function AuthContainer(props){
 		})
 	}
 
-	function validator(values) {
+	const validator = useCallback ((values) => {
 		
 		if([...Object.values(values)].every(val => val === '')) return null
 
@@ -103,19 +104,23 @@ function AuthContainer(props){
 
 		return null
 
-	}
+	}, [isTypeLogin])
 
 	useEffect(() => {
+		let cleanupFunction = false;
 
-		if (validator(values)) {
-			setMessage(validator(values))
-			setDisabled(true)
-		}else{
-			setMessage(null)
-			setDisabled(false)
+		if (!cleanupFunction){
+			if (validator(values)) {
+				setMessage(validator(values))
+				setDisabled(true)
+			}else{
+				setMessage(null)
+				setDisabled(false)
+			}
 		}
 
-	}, [...Object.values(values), isTypeLogin])
+		return () => cleanupFunction = true;
+	}, [values.name, values.email,values.password,values._password, validator, values])
 
 	return(
 		<form className='auth-form'>

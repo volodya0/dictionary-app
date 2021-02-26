@@ -10,7 +10,7 @@ function InputContainer(props){
 
 	useEffect(() => {
 		if(translatingStatus === 'success'){setStatus('')}
-	},[original, translate])
+	},[original, translate, translatingStatus])
 
 	const clear = () => {
 		setOriginal('')
