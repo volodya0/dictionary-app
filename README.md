@@ -1,3 +1,9 @@
+# Deployed
+
+https://translator-dictionary-b7d19.web.app/
+
+https://translator-dictionary-b7d19.firebaseapp.com/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
