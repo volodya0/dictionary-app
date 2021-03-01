@@ -5,7 +5,7 @@ import React,{useState, useEffect, useCallback} from 'react'
 import {connect} from 'react-redux'
 import { mapDispatchToPropsGen } from '../../store/store'
 import { useHistory } from 'react-router-dom'
-
+import './auth.css'
 
 function AuthContainer(props){
 

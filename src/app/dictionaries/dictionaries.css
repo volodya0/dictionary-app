@@ -1,0 +1,118 @@
+.info-dic{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid #008060;
+	border-bottom: none;
+  padding: 15px;
+	background-color: 	rgb(82, 122, 102, .15);
+}
+
+.dictionary-form{
+  border: 1px solid #008060;
+	border-bottom: none;
+  margin: 0;
+	background-color: 	rgb(82, 122, 102, .15);
+}
+
+.dictionary-form .btn{
+  margin: 10px;
+}
+
+.dictionary-list{
+  margin: 0;
+  padding: 30px 10px;
+  border: 1px solid #008060;
+}
+
+.dictionary-list .card{
+	height: 270px;
+	margin-bottom : 20px;
+	background-color: rgba(11, 216, 110, 0.041);
+}
+
+.dictionary-list .card:hover{
+	background-color: rgba(11, 216, 110, 0.103);
+	border-color: seagreen;
+}
+
+
+.dictionary-list .my-btn{
+  margin-right : 7px;
+}
+
+.dictionaries-wrapper{
+  margin: 0;
+}
+.dictionaries-info-buttons button{
+  margin: 0 10px;
+}
+
+.card-button{
+	font-size: 60px;
+	font-weight: 700;
+	color: rgba(62, 98, 80, 0.65);
+	border-color: #74b495;
+  width: 100%;
+	height: 270px;
+	background-color: #daffec28; 
+}
+
+.card-button:hover{
+	color: rgba(11, 71, 41, 0.85);
+	border-color: #00994d4d;
+	background-color: #80ffc025;
+	border-color: seagreen;
+}
+.card-button:focus{
+	color: rgba(11, 71, 41, 0.85);
+	box-shadow: none;
+	outline-color: #00994d;
+	border-color: #00994d;
+	background-color: #80ffbf;
+}
+.card-button-disabled{
+	color: rgba(103, 119, 111, 0.95);
+	border-color: #d3d3d3;
+	background-color: #e7e7e7;
+}
+.card-button-disabled:hover{
+	color: rgba(103, 119, 111, 0.95);
+	border-color: #d3d3d3;
+	background-color: #e7e7e7;
+	cursor: default;
+}
+.card-button-disabled:focus{
+	color: rgba(103, 119, 111, 0.95);
+	border-color: #d3d3d3;
+	background-color: #e7e7e7;
+}
+
+.card-button-wrapper{
+  height: 100%;
+  padding-bottom: 20px;
+}
+
+.input-buttons-row{
+  display: flex;
+  margin-top: 25px;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.input-buttons-row button{
+  margin: 5px;
+  padding: 8px 25px;
+}
+
+.input-inputs-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.input-inputs-row input{
+  padding: 8px ;
+  margin-right: 15px;
+}
+

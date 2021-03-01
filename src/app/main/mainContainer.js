@@ -2,6 +2,7 @@ import React,{useEffect, useState, useCallback} from 'react';
 import MainPage from './mainPage'
 import {connect} from 'react-redux'
 import {mapDispatchToPropsGen, mapStateToPropsGen} from '../../store/store'
+import './main.css'
 
 function MainContainer(props){
 

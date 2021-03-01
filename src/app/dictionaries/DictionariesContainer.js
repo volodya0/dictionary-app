@@ -4,6 +4,7 @@ import Dictionaries from './Dictionaries'
 import codes from '../../requests/wordsAndCodes'
 import {connect} from 'react-redux'
 import {mapStateToPropsGen, mapDispatchToPropsGen} from '../../store/store'
+import './dictionaries.css'
 
 function DictionariesContainer(props){
 
@@ -18,7 +19,7 @@ function DictionariesContainer(props){
 			() => setStatus('success'),
 			() => setStatus('fail')
 		)
-	}, [setStatus])
+	}, [setStatus, props])
 	
 	function addDict(name, from, to) {
 		setStatus('request')
@@ -36,7 +37,7 @@ function DictionariesContainer(props){
 
 	useEffect(() => {
 		refresh()
-	}, [refresh])
+	}, [])
 	
 	return (
 		<Dictionaries 

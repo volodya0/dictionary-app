@@ -7,17 +7,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 .container{
   width: 80%;
-}
-
-.htmlForm-control{
-  width: 90%;
 }
 
 .my-loader-wrapper{
@@ -26,91 +17,11 @@ code {
   width: 100%;
 }
 
-.input-section{
-  text-align: center;
-  padding: 20px 80px;
-  margin-left: auto;
-  margin-right: auto;
-  border: 1px solid black;
-  width: 100%;
-  margin-top: 0;
-}
-
-.default-input-wrapper{
-  width: 20%;
-}
-.default-btn-wrapper{
-  width: 10%;
-}
-
-.list{
-  padding: 20px;
-  margin-bottom: 30px;
-  border: 1px solid black;
-}
-
 .fs-7{
   font-size: 14px;
 }
 .fs-8{
   font-size: 13px;
-}
-
-
-
-.list-group{
-  border-radius: 0;
-  color: rgb(141, 141, 141);
-}
-
-
-.myAlert{
-  padding: 15px 35px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  border: 1px solid black;
-}
-
-.alert-btn{
-  margin: 0 7px;
-  padding: 3px 10px;
-  font-size: 16px;
-  border-radius: 4px;
-}
-
-.alert-loader{
-  width: 25px;
-  height: 25px;
-}
-
-.my-bg-success{
-  background-color: rgb(197, 235, 197);
-}
-.my-bg-warning{
-  background-color: rgb(235, 241, 152);
-}
-.my-bg-primary{
-  background-color: rgb(152, 205, 241);
-}
-
-.auth-form{
-  width: 35%;
-  padding: 35px;
-  margin: 40px auto;
-  border: 1px solid black
-}
-
-.auth-button-loader{
-  position: relative;
-}
-.auth-buttons-row{
-  margin-top: 30px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
 
 .header-wrapper{
@@ -141,104 +52,12 @@ code {
   font-weight: 700; 
 }
 
-.languages-wrapper label{
+.header-wrapper .languages-wrapper label{
   margin: 0 5px;
 }
 
-.info-dic{
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border: 1px solid black;
-  padding: 15px;
-}
-
-.dictionary-form{
-  border: 1px solid black;
-  margin: 0;
-}
-
-.dictionary-form .btn{
-  margin: 10px;
-}
-
-.dictionary-list{
-  margin: 0;
-  padding: 30px 10px;
-  border: 1px solid black;
-}
-
-.dictionary-list .card{
-  margin-bottom : 20px;
-}
 
 
-.dictionary-list .my-btn{
-  margin-right : 7px;
-}
 
-.dictionary-wrapper{
-  margin: 0;
-}
 
-.my-border{
-  border: 1px solid black;
-  padding: 15px;
-}
 
-.card-button{
-  width: 100%;
-  height: 100%;
-}
-.card-button-wrapper{
-  height: 100%;
-  padding-bottom: 20px;
-}
-
-.input-buttons-row{
-  display: flex;
-  margin-top: 25px;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-
-.input-buttons-row button{
-  margin: 5px;
-  padding: 8px 25px;
-}
-
-.input-inputs-row{
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.input-inputs-row input{
-  padding: 8px ;
-  margin-right: 15px;
-}
-
-.main-section{
-  border: 1px solid black;
-  padding: 20px;
-}
-
-.row-with-info{
-  border-bottom: 1px solid rgb(195, 195, 195);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 10px;
-}
-
-.row-with-info p{
-  font-size: 18px;
-}
-
-.dictionaries-info-buttons button{
-  margin: 0 10px;
-}
-
-.statistic button{
-  margin: 10px;
-}

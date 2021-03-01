@@ -5,7 +5,7 @@ function Dictionaries(props) {
 	const status = props.status
 	return(
 		<div>
-			<div className='row dictionary-wrapper'>
+			<div className='row dictionaries-wrapper'>
 				{props.addMode ? 
 					<AddDictionary 
 						langArray={props.langArray}
@@ -111,17 +111,19 @@ function List(props) {
 					)
 				})
 			}	
-			{!props.addMode? 
-				<div className='col-sm-4' >
+			<div className='col-sm-4' >
 				<div className='card-button-wrapper'>
 					<Button options={{
-						class: 'card-button',
+						class: `card-button ${props.addMode? 'card-button-disabled' : ''}`,
 						color: 'info',
-						text: '+ NEW',
-						onClick:() => {props.setAddMode(mode => !mode)}
+						text: 'NEW',
+						onClick:() => {
+							props.setAddMode(true)
+							window.scrollTo(0,0)
+						}
 					}} />
 				</div>
-			</div>:<></>}
+			</div>
 		</div>
 	)
 }
@@ -143,7 +145,7 @@ function AddDictionary(props) {
 	}, [selectTo, selectFrom])
 
 return(
-	<form className='dictionary-form'>
+	<form className='dictionary-form' id='dictionaries-input'>
 
 		<label className='form-label my-3 w-100 text-center'><h3>Please input params</h3></label>
 		<div class='input-group mb-1'>
@@ -196,7 +198,7 @@ return(
 		</div>
 		<Button options = {{
 			color:'secondary',
-			text:'<-- Back to main',
+			text:'Back to main',
 			linkTo:'main'
 		}}/>
 		<Button options = {{

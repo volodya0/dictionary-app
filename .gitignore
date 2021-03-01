@@ -8,6 +8,10 @@
 /config.js
 config.js
 database.rules.json
+/.firebase
+firebase.json
+.firebaserc
+.eslintcache
 
 # testing
 /coverage

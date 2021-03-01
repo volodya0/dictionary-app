@@ -6,6 +6,7 @@ import {useRouteMatch} from 'react-router-dom'
 import Table from './table/Table'
 import {connect} from 'react-redux'
 import {mapDispatchToPropsGen, mapStateToPropsGen} from '../../store/store'
+import './edit.css'
 
 const EditContainer = (props) => {
 
@@ -53,7 +54,7 @@ const EditContainer = (props) => {
 		
 	useEffect(() => {
 		refresh()
-	}, [refresh])
+	}, [])
 
 	return (
 		<>

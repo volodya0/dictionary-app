@@ -1,0 +1,32 @@
+.input-section{
+  text-align: center;
+  padding: 20px 80px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #008060;
+	border-bottom: none;
+  width: 100%;
+  margin-top: 0;
+}
+
+.input-inputs-row{
+	display: flex;
+	justify-content: space-between;
+}
+
+.input-inputs-row input{
+
+	width: 32%;
+}
+.empty-message{
+	width: 100%;
+	text-align: center;
+}
+
+
+.list{
+  padding: 20px;
+	padding-bottom: 0;
+  margin-bottom: 30px;
+  border: 1px solid #008060;
+}

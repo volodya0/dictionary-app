@@ -13,10 +13,10 @@ function Header(props){
 				</div>
 			</div>
 			<div className='languages-wrapper'>
-				<input type='radio' className='btn-check' name='options-outlined' id='English-lang' autocomplete='off' checked/>
+				<input type='radio' className='btn-check' name='options-outlined' id='English-lang' autoComplete='off' defaultChecked/>
 				<label className='btn btn-outline-light' htmlFor='English-lang'>English</label>
 
-				<input type='radio' className='btn-check' name='options-outlined' id='Russian-lang' autocomplete='off'/>
+				<input type='radio' className='btn-check' name='options-outlined' id='Russian-lang' autoComplete='off'/>
 				<label className='btn btn-outline-light' htmlFor='Russian-lang'>Russian</label>
 			</div>
 			<div className='header-user_info'>

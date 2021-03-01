@@ -10,7 +10,7 @@ function Table({status, items, remove}){
 				status === 'error'? <h5>Error</h5>: 
 				status === 'request'? <Loader />:
 				status === 'success'?
-					items === [] ? <h4>This dictionary is empty now</h4>: 
+					items.length === 0 ? <h4 className='empty-message'>This dictionary is empty</h4>: 
 						<table className="table">
 							<thead>
 								<tr>
@@ -32,7 +32,7 @@ function Table({status, items, remove}){
 											remove={remove}
 										/> )
 								}
-								<tr><th>it's all</th></tr>
+								<tr><th></th></tr>
 							</tbody>
 						</table> 
 				: <></>
