@@ -1,5 +1,5 @@
 # Deployed
- 
+
 https://translator-dictionary-b7d19.web.app/
 
 https://translator-dictionary-b7d19.firebaseapp.com/
