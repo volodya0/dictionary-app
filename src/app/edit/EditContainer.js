@@ -1,6 +1,6 @@
 ﻿import React,{useState, useEffect, useCallback} from 'react'
-import {dictionaryRequests}  from '../../requests/request-database'
-import translateRequest from '../../requests/request-translator'
+import {dictionaryRequests}  from '../../requests/requests'
+import {autoTranslate} from '../../requests/requests'
 import InputContainer from './input/InputContainer'
 import {useRouteMatch} from 'react-router-dom'
 import Table from './table/Table'
@@ -46,7 +46,7 @@ const EditContainer = (props) => {
 
 
 	function translate(original, onSuccess, onFail) {
-		translateRequest({original, from:'en', to:'ru', onSuccess, onFail})
+		autoTranslate({original, from:'en', to:'ru', onSuccess, onFail})
 	}
 
 	const refresh = useCallback(() => {
@@ -58,8 +58,8 @@ const EditContainer = (props) => {
 
 	return (
 		<>
-			<InputContainer add={add} translate={translate}/>
-			<Table status={status} items={items} remove={remove} />
+			<InputContainer add={add} translate={translate} theme={props.theme}/>
+			<Table status={status} items={items} remove={remove} theme={props.theme} />
 		</>
 	)
 }

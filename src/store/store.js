@@ -1,8 +1,7 @@
 
-import {createStore ,combineReducers, applyMiddleware} from 'redux'
+import {createStore ,combineReducers} from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension';
-import ReduxThunk from 'redux-thunk';
-import {authRequests, dictionaryRequests} from '../requests/request-database'
+import {authRequests, dictionaryRequests} from '../requests/requests'
 
 function authReducer(state = {authorized:false, user:{}}, action) {
   switch (action.type) {
@@ -26,10 +25,23 @@ function dictReducer(state = [], action) {
   }
 }
 
+function themeReducer(state = false, action) {
+  switch (action.type) {
+    case 'THEME-DEFAULT':
+      return false
+    case 'THEME-DARK':
+      return true
+    case 'THEME-TOGGLE':
+      return !state
+    default:
+      return state
+  }
+}
 
-const rootReducer = combineReducers({auth:authReducer, dictionaries:dictReducer})
 
-const store = createStore(rootReducer, {}, composeWithDevTools(applyMiddleware(ReduxThunk)))
+const rootReducer = combineReducers({auth:authReducer, dictionaries:dictReducer, theme:themeReducer})
+
+const store = createStore(rootReducer, {}, composeWithDevTools())
 
 export default store
 
@@ -39,11 +51,13 @@ export function mapStateToPropsGen(component){
       return (state) => {
         return {
           authorized : state.auth.authorized,
+          theme : state.theme,
         }
       }
     case 'main':
       return (state) => {
         return {
+          theme : state.theme,
           user : state.auth.user,
           dictCount : state.dictionaries.length,
           itemsCount : state.dictionaries
@@ -53,6 +67,7 @@ export function mapStateToPropsGen(component){
     case 'dictionaries':
       return (state) => {
         return {
+          theme : state.theme,
           user : state.auth.user,
           dictionaries: state.dictionaries
         }
@@ -60,6 +75,7 @@ export function mapStateToPropsGen(component){
     case 'edit':
       return (state) => {
         return {
+          theme : state.theme,
           user : state.auth.user,
           dictionaries : state.dictionaries
         }
@@ -67,7 +83,8 @@ export function mapStateToPropsGen(component){
     case 'header':
       return (state) => {
         return {
-          email : state.auth.user.email
+          email : state.auth.user.email,
+          theme : state.theme
         }
       }
   
@@ -75,8 +92,6 @@ export function mapStateToPropsGen(component){
       return undefined
   }
 }
-
-
 
 export function mapDispatchToPropsGen(component){
   switch (component) {
@@ -141,6 +156,9 @@ export function mapDispatchToPropsGen(component){
           logOut : () => {
             authRequests.logOut()
             dispatch({type:'LOGOUT'})
+          },
+          toggle : () => {
+            dispatch({type:'THEME-TOGGLE'})
           }
         }
       }  

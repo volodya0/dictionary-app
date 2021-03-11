@@ -1,7 +1,8 @@
-const languages = {
+/* eslint-disable import/no-anonymous-default-export */
+export default{
 	english:'en',
 	russian:'ru',
-	ukrainian:'uk',}
+	ukrainian:'uk'}
 // 	arabic:'ar',
 // 	belarusian:'be',
 // 	chinese:'zh',
@@ -21,4 +22,3 @@ const languages = {
 // 	turkish:'tr',
 // }
 
-export default languages

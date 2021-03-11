@@ -8,7 +8,6 @@ function MainContainer(props){
 
 	const [status, setStatus] = useState('ok')
 
-
 	const refresh = useCallback(() => {
 		props.refreshDictionaries(() => setStatus('success'),() => setStatus('fail'))}, [props])
 
@@ -22,6 +21,7 @@ function MainContainer(props){
 
 	return (
 		<MainPage 
+			theme={props.theme}
 			status={status}
 			user={props.user}
 			dictCount={props.dictCount}

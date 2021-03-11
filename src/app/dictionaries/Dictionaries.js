@@ -1,5 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import {Button, Loader} from '../components/components'
+import styled from 'styled-components'
+import colors from '../../colors'
 
 function Dictionaries(props) {
 	const status = props.status
@@ -11,11 +13,13 @@ function Dictionaries(props) {
 						langArray={props.langArray}
 						add={props.add}
 						cancel={() => {props.setAddMode(false)}}
+						theme={props.theme}
 					/> 
 					:
 					<Info
 						setAddMode={props.setAddMode}
 						refresh={props.refresh}
+						theme={props.theme}
 					/>
 				}{
 				status === 'request'?
@@ -33,6 +37,7 @@ function Dictionaries(props) {
 					</div>
 					:
 					<List
+						theme={props.theme}
 						dictionaries ={props.dictionaries}
 						rem={props.rem}
 						addMode={props.addMode}
@@ -47,8 +52,11 @@ function Dictionaries(props) {
 export default Dictionaries
 
 function Info(props) {
+	const InfoStyle = styled.div`
+    background-color: ${colors.secondHead[+props.theme]};
+  `
 	return(
-		<div className='info-dic'>
+		<InfoStyle className='info-dic'>
 			<div>
 				<h1>Dictionaries</h1>
 			</div>
@@ -69,18 +77,23 @@ function Info(props) {
 					onClick:() => {props.setAddMode(mode => !mode)}
 				}}/>
 			</div>
-		</div>
+		</InfoStyle>
 	)	
 }
 
 function List(props) {
+
+	const CardStyled = styled.div`
+    background-color: ${colors.info[+props.theme]};
+  `
+
 	return(
 		<div className='row dictionary-list'>
 			{
 				props.dictionaries.map(dict => {
 					return(
 						<div className='col-sm-4' key={dict.date}>
-							<div className='card'>
+							<CardStyled className='card'>
 								<div className='card-body'>
 									<h5 className='card-title'>{dict.name}</h5>
 									<p className='card-text'>{`From : ${dict.from.language}`}</p>
@@ -106,7 +119,7 @@ function List(props) {
 										;}
 									}} />
 								</div>
-							</div>
+							</CardStyled>
 						</div>
 					)
 				})
@@ -115,7 +128,7 @@ function List(props) {
 				<div className='card-button-wrapper'>
 					<Button options={{
 						class: `card-button ${props.addMode? 'card-button-disabled' : ''}`,
-						color: 'info',
+						color: 'light',
 						text: 'NEW',
 						onClick:() => {
 							props.setAddMode(true)
@@ -138,14 +151,18 @@ function AddDictionary(props) {
 		const option = eTarget[eTarget.selectedIndex]
 		const object = {code:option.value, language:option.text}
 		type === 'from' ? setFrom(object) : setTo(object)
-	}
+	}	
 
 	useEffect(() => {
 		setName(`${selectFrom.language} - ${selectTo.language}`)
-	}, [selectTo, selectFrom])
+	}, [selectTo, selectFrom]) 
+
+	const FormStyle = styled.div`
+    background-color: ${colors.secondHead[+props.theme]};
+  `
 
 return(
-	<form className='dictionary-form' id='dictionaries-input'>
+	<FormStyle className='dictionary-form' id='dictionaries-input'>
 
 		<label className='form-label my-3 w-100 text-center'><h3>Please input params</h3></label>
 		<div class='input-group mb-1'>
@@ -212,6 +229,6 @@ return(
 			text:'Cancel',
 			onClick: props.cancel
 		}}/>
-	</form>
+	</FormStyle>
 	)
 }

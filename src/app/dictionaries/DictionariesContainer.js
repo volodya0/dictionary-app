@@ -1,7 +1,7 @@
 import React,{useState, useEffect, useCallback} from 'react'
-import {dictionaryRequests} from '../../requests/request-database'
+import {dictionaryRequests} from '../../requests/requests'
 import Dictionaries from './Dictionaries'
-import codes from '../../requests/wordsAndCodes'
+import codes from '../../requests/langCodes'
 import {connect} from 'react-redux'
 import {mapStateToPropsGen, mapDispatchToPropsGen} from '../../store/store'
 import './dictionaries.css'
@@ -41,6 +41,7 @@ function DictionariesContainer(props){
 	
 	return (
 		<Dictionaries 
+			theme={props.theme}
 			status={status}
 			addMode={addMode}
 			langArray={langArray}

@@ -7,7 +7,7 @@ function Parse({number, item, remove}){
 			<td>{item.original}</td>
 			<td>{item.translate}</td>
 			<td>{item.description}</td>
-			<td>{new Date(+item.date).toLocaleString()}</td>
+			<td className='date'>{new Date(+item.date).toLocaleString().slice(0, 17)}</td>
 			<td>
 				<button 
 					type="button" 

@@ -1,4 +1,4 @@
-import {authRequests} from '../../requests/request-database'
+import {authRequests} from '../../requests/requests'
 import {Error, Button, Loader} from '../components/components'
 import {LoginInputs, RegisterInputs} from './Inputs'
 import React,{useState, useEffect, useCallback} from 'react'

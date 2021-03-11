@@ -42,13 +42,15 @@ function InputContainer(props){
 	let set = {original,setOriginal,translate,setTranslate,description,setDescription}
 
 	return(
-		<Input
-			set={set} 
-			clear={clear} 
-			submit={submit}
-			translate={translateFunc}
-			status = {translatingStatus}
-		/>)
+			<Input
+				theme={props.theme}
+				set={set} 
+				clear={clear} 
+				submit={submit}
+				translate={translateFunc}
+				status = {translatingStatus}
+				/>
+	)
 }
 
 export default InputContainer
