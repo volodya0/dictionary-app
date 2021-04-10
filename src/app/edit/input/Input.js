@@ -1,5 +1,6 @@
 import {Input, Button, Error} from '../../components/components'
 import React from 'react'
+import { EditTexts as Text } from '../../../languages'
 
 
 function InputPage(props) {
@@ -13,21 +14,21 @@ function InputPage(props) {
 					<Input
 						disabled = {props.status === 'load'}
 						id = {'input-original'}	
-						placeholder =  {'Original'}
+						placeholder =  {Text.orig_field_text[props.lang]}
 						value = {set.original}	
 						onChange =	{e => set.setOriginal(e.target.value)}	
 					/>
 					<Input	
 						disabled = {props.status === 'load'}
 						id = {'input-translate'}	
-						placeholder =  {'Translate'}
+						placeholder =  {Text.tran_field_text[props.lang]}
 						value = {set.translate}	
 						onChange =	{e => set.setTranslate(e.target.value)}	
 					/>
 					<Input	
 						disabled = {props.status === 'load'}
 						id = {'input-description'}	
-						placeholder =  {'Description'}
+						placeholder =  {Text.desc_field_text[props.lang]}
 						value = {set.description}	
 						onChange =	{e => set.setDescription(e.target.value)}	
 					/>
@@ -35,13 +36,13 @@ function InputPage(props) {
 				<div className="input-buttons-row">
 					<Button options = {{
 						type:'button',
-						text:'Back to dictionaries',
+						text: `${Text.back_button_text[props.lang]}`,
 						color:'secondary',
 						linkTo:'/dictionaries'
 					}}/>
 					<Button options = {{
 						type:'button',
-						text:'Auto-translate',
+						text:`${Text.auto_button_text[props.lang]}`,
 						color:'primary',
 						disabled: props.set.original === '' || props.status === 'success',
 						onClick:props.translate
@@ -49,14 +50,14 @@ function InputPage(props) {
 					<Button options = {{
 						type:'button',
 						color:'warning',
-						text:'Clear',
+						text:`${Text.clear_button_text[props.lang]}`,
 						onClick:props.clear,
 						disabled: props.set.original+props.set.translate+props.set.description === ''
 					}}/>
 					<Button options = {{
 						type:'submit',
 						color:'success',
-						text:'Submit',
+						text:`${Text.submit_button_text[props.lang]}`,
 						onClick:props.submit,
 						disabled: props.set.original === '' || props.set.translate === ''
 					}}/>

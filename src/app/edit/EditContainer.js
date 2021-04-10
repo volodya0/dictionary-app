@@ -58,8 +58,8 @@ const EditContainer = (props) => {
 
 	return (
 		<>
-			<InputContainer add={add} translate={translate} theme={props.theme}/>
-			<Table status={status} items={items} remove={remove} theme={props.theme} />
+			<InputContainer lang={props.lang} add={add} translate={translate} theme={props.theme}/>
+			<Table lang={props.lang} status={status} items={items} remove={remove} theme={props.theme} />
 		</>
 	)
 }

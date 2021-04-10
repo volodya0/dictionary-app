@@ -41,6 +41,7 @@ function DictionariesContainer(props){
 	
 	return (
 		<Dictionaries 
+		  lang={props.lang}
 			theme={props.theme}
 			status={status}
 			addMode={addMode}

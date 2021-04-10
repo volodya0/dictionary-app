@@ -21,6 +21,7 @@ function MainContainer(props){
 
 	return (
 		<MainPage 
+			lang = {props.lang}
 			theme={props.theme}
 			status={status}
 			user={props.user}

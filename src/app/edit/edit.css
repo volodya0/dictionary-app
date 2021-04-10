@@ -38,3 +38,30 @@ th, td{
   text-align: center;
 }
 
+/* .Num_col, .Opt_col,.Orig_col,.Tran_col,.Desc_col,.Date_col{
+  overflow: hidden !important;
+}
+
+.Num_col{
+  width: 5%;
+} 
+
+.Orig_col{
+  width: 20px ;
+}
+
+.Tran_col{
+  width: 20%;
+}
+
+.Desc_col{
+  width: 15%;
+}
+
+.Date_col{
+ width: 20%;
+}
+
+.Opt_col{
+  width: 10%;
+} */

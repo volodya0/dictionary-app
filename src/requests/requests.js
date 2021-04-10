@@ -71,7 +71,7 @@ export const dictionaryRequests = {
 }
 
 export const autoTranslate = ({original, from, to, onSuccess, onFail}) => {
-	fetch(`${translationApiUrl}?q=${original}!&langpair=${from}|${to}`)
+	fetch(`${translationApiUrl}get?q=${original}!&langpair=${from}|${to}`)
 	.then(response => response.json())
 	.then(res => {
 		if(res.responseStatus === 200){

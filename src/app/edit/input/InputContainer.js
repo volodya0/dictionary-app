@@ -43,6 +43,7 @@ function InputContainer(props){
 
 	return(
 			<Input
+				lang={props.lang}
 				theme={props.theme}
 				set={set} 
 				clear={clear} 

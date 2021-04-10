@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react'
 import {Button, Loader} from '../components/components'
 import styled from 'styled-components'
 import colors from '../../colors'
+import { DictionariesTexts as Text } from '../../languages' 
 
 function Dictionaries(props) {
 	const status = props.status
@@ -10,6 +11,7 @@ function Dictionaries(props) {
 			<div className='row dictionaries-wrapper'>
 				{props.addMode ? 
 					<AddDictionary 
+						lang = {props.lang}
 						langArray={props.langArray}
 						add={props.add}
 						cancel={() => {props.setAddMode(false)}}
@@ -17,6 +19,7 @@ function Dictionaries(props) {
 					/> 
 					:
 					<Info
+						lang = {props.lang}
 						setAddMode={props.setAddMode}
 						refresh={props.refresh}
 						theme={props.theme}
@@ -37,6 +40,7 @@ function Dictionaries(props) {
 					</div>
 					:
 					<List
+						lang = {props.lang}
 						theme={props.theme}
 						dictionaries ={props.dictionaries}
 						rem={props.rem}
@@ -58,22 +62,22 @@ function Info(props) {
 	return(
 		<InfoStyle className='info-dic'>
 			<div>
-				<h1>Dictionaries</h1>
+				<h1>{Text.header_text[props.lang]}</h1>
 			</div>
 			<div className='dictionaries-info-buttons'>
 				<Button options = {{
 					color:'secondary',
-					text:'Back to main',
+					text: `${Text.back_button_text[props.lang]}`,
 					linkTo:'main'
 				}}/>
 				<Button options = {{
-					text:'Refresh',
+					text: `${Text.refresh_button_text[props.lang]}`,
 					onClick:props.refresh
 				}}/>
 				<Button options = {{
 					color:'success',
 					class:'add-dictionary-btn',
-					text:'Create new',
+					text:`${Text.create_button_text[props.lang]}`,
 					onClick:() => {props.setAddMode(mode => !mode)}
 				}}/>
 			</div>
@@ -96,27 +100,22 @@ function List(props) {
 							<CardStyled className='card'>
 								<div className='card-body'>
 									<h5 className='card-title'>{dict.name}</h5>
-									<p className='card-text'>{`From : ${dict.from.language}`}</p>
-									<p className='card-text'>{`To : ${dict.to.language}`}</p>
-									<p className='card-text'>{`Words : ${dict.items ? Object.keys(dict.items).length : 0}`}</p>
-									<p className='card-text'>{`Created : ${new Date(+dict.date).toLocaleString()}`}</p>
-									<Button options={{
-										color: 'success',
-										text: 'Learn',
-										onClick: () => {}
-									}} />
+									<p className='card-text'>{`${Text.card_from_text[props.lang]} : ${dict.from.language}`}</p>
+									<p className='card-text'>{`${Text.card_to_text[props.lang]} : ${dict.to.language}`}</p>
+									<p className='card-text'>{`${Text.card_words_text[props.lang]} : ${dict.items ? Object.keys(dict.items).length : 0}`}</p>
+									<p className='card-text'>{`${Text.card_created_text[props.lang]} : ${new Date(+dict.date).toLocaleString()}`}</p>
 									<Button options={{
 										color: 'primary',
-										text: 'Edit',
+										text: `${Text.edit_card_btn_text[props.lang]}`,
 										linkTo: 'edit/'+dict.date
 									}} />
 									<Button options={{
 										color: 'warning',
-										text: 'Delete',
+										text: `${Text.delete_card_btn_text[props.lang]}`,
 										onClick: () => {
-											const c = window.confirm('Delete '+dict.name+'?')
-											if (c) props.rem(dict.date)
-										;}
+											const c = window.confirm(`${Text.delete_card_btn_text[props.lang]} ${dict.name} ?`);
+											if (c) props.rem(dict.date);
+										}
 									}} />
 								</div>
 							</CardStyled>
@@ -129,7 +128,7 @@ function List(props) {
 					<Button options={{
 						class: `card-button ${props.addMode? 'card-button-disabled' : ''}`,
 						color: 'light',
-						text: 'NEW',
+						text: `${Text.new_card_text[props.lang]}`,
 						onClick:() => {
 							props.setAddMode(true)
 							window.scrollTo(0,0)
@@ -164,10 +163,10 @@ function AddDictionary(props) {
 return(
 	<FormStyle className='dictionary-form' id='dictionaries-input'>
 
-		<label className='form-label my-3 w-100 text-center'><h3>Please input params</h3></label>
+		<label className='form-label my-3 w-100 text-center'><h3>{Text.input_header_text[props.lang]}</h3></label>
 		<div class='input-group mb-1'>
 
-			<label className='form-label mx-3'>From:</label>
+			<label className='form-label mx-3'>{Text.input_from_text[props.lang]}</label>
 			<select 
 				name = 'from'
 				className='form-select' 
@@ -184,7 +183,7 @@ return(
 					}
 			</select>
 
-			<label className='form-label mx-3'>To:</label>
+			<label className='form-label mx-3'>{Text.input_to_text[props.lang]}</label>
 			<select 
 				name='to'
 				className='form-select' 
@@ -202,7 +201,7 @@ return(
 			</select>
 
 			<div className='input-group mt-4 mb-2'>
-				<label className='form-label mx-3'>Name:</label>
+				<label className='form-label mx-3'>{Text.input_name_text[props.lang]}</label>
 				<input 
 					type='text' 
 					className='form-control'  
@@ -215,18 +214,18 @@ return(
 		</div>
 		<Button options = {{
 			color:'secondary',
-			text:'Back to main',
+			text:`${Text.back_button_text[props.lang]}`,
 			linkTo:'main'
 		}}/>
 		<Button options = {{
 			color:'success',
-			text:'Add',
+			text:`${Text.add_button_text[props.lang]}`,
 			disabled: ((name === '')||(selectTo.language === selectFrom.language)),
 			onClick: () => props.add(name, selectFrom, selectTo)
 		}}/>
 		<Button options = {{
 			color:'warning',
-			text:'Cancel',
+			text:`${Text.cancel_button_text[props.lang]}`,
 			onClick: props.cancel
 		}}/>
 	</FormStyle>

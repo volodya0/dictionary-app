@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import {Button, Loader} from '../components/components'
 import styled from 'styled-components'
 import colors from '../../colors'
+import { mainTexts as Text } from '../../languages'
 
 
 function MainPage(props) {
@@ -19,51 +20,48 @@ function MainPage(props) {
 	return(
 		<>
 			<div className='main-section'>
-				<h3>Welcome {props.user.name}</h3>
+				<h3>{Text.header_text[props.lang]} {props.user.name}</h3>
 					{
 						props.status === 'request' ? <Loader/> : <>
 						<div className='statistic'>
-							<p>Dictionaries: {props.dictCount}</p> 
-							<p>Words: {props.itemsCount}</p>
+							<p>{Text.dictionaries_text[props.lang]}: {props.dictCount}</p> 
+							<p>{Text.words_text[props.lang]}: {props.itemsCount}</p>
 						</div>
 						<Buttons className='buttons'>
 							<Button options={{
-								text:'Go to dictionaries',
+								text:`${Text.dict_button_text[props.lang]}`,
 								linkTo: '/dictionaries'
 							}}/>
 							<Button options={{
-								text:'Go learn',
+								disabled: true,
+								text:`${Text.learn_button_text[props.lang]}`,
 								linkTo: '/learn'
 							}}/>
 							<Button options={{
-								text:'Account info',
+								text: `${Text.info_button_text[props.lang]}`,
 								onClick:() => setMode(!infoMode)
 							}}/>
 							<Button options={{
-								text:'Log Out',
-								onClick:props.logOut
-							}}/>
-							<Button options={{
-								text:'View sources on gitHub',
+								text: `${Text.view_button_text[props.lang]}`,
 								color:'success',
 								onClick: (e) => {window.open('https://github.com/volodya0/dictionary-app')}
 							}}/>
 								{infoMode? 
 									<AccountInfo className='account-info'>
 										<div className='row-with-info'>
-											<p>name: {props.user.name}</p>
+											<p>{Text.name_text[props.lang]}: {props.user.name}</p>
 										</div>
 										<div className='row-with-info'>
-											<p>email: {props.user.email}</p>
+											<p>{Text.email_text[props.lang]}: {props.user.email}</p>
 										</div>
 										<div className='row-with-info'>
-											<p>created: {new Date(+props.user.created).toLocaleString()}</p>
+											<p>{Text.created_text[props.lang]}: {new Date(+props.user.created).toLocaleString()}</p>
 										</div>
 										<div className='row-with-info'>
-											<p>lastLogin: {new Date(+props.user.lastLogin).toLocaleString()}</p>
+											<p>{Text.last_text[props.lang]}: {new Date(+props.user.lastLogin).toLocaleString()}</p>
 										</div>		
 										<Button options={{
-											text:'Close',
+											text: `${Text.close_button_text[props.lang]}`,
 											onClick:() => setMode(false)
 										}}/>						
 									</AccountInfo>
