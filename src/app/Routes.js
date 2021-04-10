@@ -23,7 +23,9 @@ function Routes(props){
 	`	
 
 	if(!props.authorized){
-		return <AuthContainer/>
+		return <>
+			<AuthContainer/>
+		</>
 	}else{
 		return(
 			<Window>

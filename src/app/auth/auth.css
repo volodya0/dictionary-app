@@ -1,10 +1,14 @@
+.wrapper{
+  padding-top: 30px;
+  min-height: 100vh;
+}
+
 .auth-form{
   width: 40%;
   padding: 45px;
-  margin: 40px auto;
+  margin: 0 auto;
   border: 1px solid #00cc66;
-	background-color: #e6fff2;
-	border-radius: 5px;
+	border-radius: 1px;
 }
 
 .auth-button-loader{

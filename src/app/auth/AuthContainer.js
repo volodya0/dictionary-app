@@ -3,11 +3,23 @@ import {Error, Button, Loader} from '../components/components'
 import {LoginInputs, RegisterInputs} from './Inputs'
 import React,{useState, useEffect, useCallback} from 'react'
 import {connect} from 'react-redux'
-import { mapDispatchToPropsGen } from '../../store/store'
+import { mapDispatchToPropsGen, mapStateToPropsGen } from '../../store/store'
 import { useHistory } from 'react-router-dom'
+import Header from '../header'
 import './auth.css'
+import styled from 'styled-components'
+import colors from '../../colors'
+import { authTexts as Text } from '../../languages'
 
 function AuthContainer(props){
+
+	const Styled = styled.div`
+    background-color: ${colors.windowBackground[+props.theme]} ;
+		color: ${colors.text[+props.theme]}
+  `
+	const Form = styled.form`
+    background-color: ${colors.containerBackground[+props.theme]} ;
+  `
 
 	const [isTypeLogin, setType] = useState(true)
 	const [message, setMessage] = useState(null)
@@ -19,14 +31,14 @@ function AuthContainer(props){
 	const mainButtonOptions = {
 		color: 'success',
 		disabled: loader || disabledBtn,
-		text: isTypeLogin ? 'Log In' : 'Register' ,
+		text: isTypeLogin ? Text.login_button_text[props.lang] : Text.register_button_text[props.lang] ,
 		onClick: () => isTypeLogin ? login() : register() 
 	}
 
 	const toggleButtonOptions = {
 		disabled:loader,
 		color:'primary'	,
-		text: isTypeLogin ? 'Create account' : 'Back to login',
+		text: isTypeLogin ? Text.create_button_text[props.lang] : Text.back_button_text[props.lang],
 		onClick: () => setType(!isTypeLogin)
 	}
 
@@ -123,43 +135,46 @@ function AuthContainer(props){
 	}, [values.name, values.email,values.password,values._password, validator, values])
 
 	return(
-		<form className='auth-form'>
+		<Styled className='wrapper'>
+			<Header page='login'/>
+			<Form className='auth-form'>
 
-			{isTypeLogin 
+				{isTypeLogin 
 
-			? 
-				<LoginInputs
-					set={set}
-					values={values}
-					disabled={loader}
-				/>
+				? 
+					<LoginInputs
+						lang={props.lang}
+						set={set}
+						values={values}
+						disabled={loader}
+					/>
 
-			: 
-				<RegisterInputs
-					set={set}
-					values={values}
-					disabled={loader}
-				/>
-				
-			}
+				: 
+					<RegisterInputs
+						lang={props.lang}
+						set={set}
+						values={values}
+						disabled={loader}
+					/>
+					
+				}
 
-			<Error message={message}/>
+				<Error message={message}/>
 
-			<div className='auth-buttons-row'>
+				<div className='auth-buttons-row'>
 
-				<Button options={mainButtonOptions}/>
+					<Button options={mainButtonOptions}/>
 
-				{loader ? <span className='auth-button-loader'><Loader size={15}/></span> : <></>}
+					{loader ? <span className='auth-button-loader'><Loader size={15}/></span> : <></>}
 
-				<Button options={toggleButtonOptions}/>
-
-			</div>
-
-		</form>
+					<Button options={toggleButtonOptions}/>
+				</div>
+			</Form>
+		</Styled>
 	)
 
 }
 
-const Auth_w = connect(undefined, mapDispatchToPropsGen('auth'))(AuthContainer)
+const Auth_w = connect(mapStateToPropsGen('auth'), mapDispatchToPropsGen('auth'))(AuthContainer)
 
 export default Auth_w

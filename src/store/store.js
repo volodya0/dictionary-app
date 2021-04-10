@@ -38,8 +38,21 @@ function themeReducer(state = false, action) {
   }
 }
 
+function languageReducer(state = 0, action) {
+  switch (action.type) {
+    case 'LANG-EN':
+      return 0
+    case 'LANG-RU':
+      return 1
+    case 'LANG-TOGGLE':
+      return +!state
+    default:
+      return state
+  }
+}
 
-const rootReducer = combineReducers({auth:authReducer, dictionaries:dictReducer, theme:themeReducer})
+
+const rootReducer = combineReducers({auth:authReducer, dictionaries:dictReducer, theme:themeReducer, lang:languageReducer})
 
 const store = createStore(rootReducer, {}, composeWithDevTools())
 
@@ -47,6 +60,13 @@ export default store
 
 export function mapStateToPropsGen(component){
   switch (component) {
+    case 'auth':
+      return (state) => {
+        return {
+          theme : state.theme,
+          lang : state.lang
+        }
+      }
     case 'routes':
       return (state) => {
         return {
@@ -57,6 +77,7 @@ export function mapStateToPropsGen(component){
     case 'main':
       return (state) => {
         return {
+          lang : state.lang,
           theme : state.theme,
           user : state.auth.user,
           dictCount : state.dictionaries.length,
@@ -67,6 +88,7 @@ export function mapStateToPropsGen(component){
     case 'dictionaries':
       return (state) => {
         return {
+          lang : state.lang,
           theme : state.theme,
           user : state.auth.user,
           dictionaries: state.dictionaries
@@ -75,6 +97,7 @@ export function mapStateToPropsGen(component){
     case 'edit':
       return (state) => {
         return {
+          lang : state.lang,
           theme : state.theme,
           user : state.auth.user,
           dictionaries : state.dictionaries
@@ -83,6 +106,7 @@ export function mapStateToPropsGen(component){
     case 'header':
       return (state) => {
         return {
+          lang : state.lang,
           email : state.auth.user.email,
           theme : state.theme
         }
@@ -157,8 +181,11 @@ export function mapDispatchToPropsGen(component){
             authRequests.logOut()
             dispatch({type:'LOGOUT'})
           },
-          toggle : () => {
+          themeToggle : () => {
             dispatch({type:'THEME-TOGGLE'})
+          },
+          languageToggle : (code) => {
+            dispatch({type: `LANG-${code.toUpperCase()}`})
           }
         }
       }  

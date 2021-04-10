@@ -1,11 +1,12 @@
 import React from 'react'
 import {Input} from '../components/components'
+import { authTexts as Text } from '../../languages'
 
 export function LoginInputs(props) {
 	return(
 		<>
 			<div className='mb-3'>
-				<label htmlFor='auth-email-input' className='form-label'>Email address</label>
+				<label htmlFor='auth-email-input' className='form-label'>{Text.email_field_text[props.lang]}</label>
 				<Input
 					id={'auth-email-input'} 
 					type={'email'}
@@ -16,7 +17,7 @@ export function LoginInputs(props) {
 				/>
 			</div>
 			<div className='mb-3'>
-				<label htmlFor='auth-password-input' className='form-label'>Password</label>
+				<label htmlFor='auth-password-input' className='form-label'>{Text.password_field_text[props.lang]}</label>
 				<Input
 					id={'auth-password-input'} 
 					type={'password'}
@@ -34,7 +35,7 @@ export function RegisterInputs(props) {
 	return(
 		<>
 			<div className='mb-3'>
-				<label htmlFor='register-name-input' className='form-label'>Your name</label>
+				<label htmlFor='register-name-input' className='form-label'>{Text.name_field_text[props.lang]}</label>
 				<Input
 					id={'register-name-input'} 
 					type={'text'}
@@ -45,7 +46,7 @@ export function RegisterInputs(props) {
 				/>
 			</div>
 			<div className='mb-3'>
-				<label htmlFor='register-email-input' className='form-label'>Email address</label>
+				<label htmlFor='register-email-input' className='form-label'>{Text.email_field_text[props.lang]}</label>
 				<Input
 					id={'register-email-input'} 
 					type={'email'}
@@ -56,7 +57,7 @@ export function RegisterInputs(props) {
 				/>
 			</div>
 			<div className='mb-3'>
-				<label htmlFor='register-password-input' className='form-label'>Password</label>
+				<label htmlFor='register-password-input' className='form-label'>{Text.password_field_text[props.lang]}</label>
 				<Input
 					id={'register-password-input'} 
 					type={'password'}
@@ -67,7 +68,7 @@ export function RegisterInputs(props) {
 				/>
 			</div>
 			<div className='mb-3'>
-				<label htmlFor='register-password-input' className='form-label'>Confirm password</label>
+				<label htmlFor='register-password-input' className='form-label'>{Text.confirm_field_text[props.lang]}</label>
 				<Input
 					id={'register-rePassword-input'} 
 					type={'password'}
